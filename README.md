@@ -8,18 +8,12 @@
 
 ## Usage
 
-You may run your own copy of this bot with Docker:
+You may run your own copy of this bot with cron and Docker.
+
+For example, this job will perform parsing and message sending every 12 hours:
 
 ```bash
-docker pull lordotu/parsing-notifier-telegram-bot
-
-docker run -dti \
-  -e TELEGRAM_API_TOKEN=<Telegram API Token> \
-  -e TELEGRAM_CHAT_ID=<Telegram Chat ID> \
-  -v <Path to parser.py file>:/app/parser.py \
-  -v <Path to urls.csv file>:/app/urls.csv \
-  --name parsing-notifier-telegram-bot \
-  lordotu/parsing-notifier-telegram-bot
+0 */12 * * * docker run --rm -dti -e TELEGRAM_API_TOKEN=<Telegram API Token> -e TELEGRAM_CHAT_ID=<Telegram Chat ID> -v <Path to parser.py file>:/app/parser.py -v <Path to urls.csv file>:/app/urls.csv --name parsing-notifier-telegram-bot lordotu/parsing-notifier-telegram-bot >/dev/null 2>&1
 ```
 
 But before, you should register your bot via **BotFather** https://t.me/BotFather, start using it and get Chat ID via this address `https://api.telegram.org/bot<Telegram API TOKEN>/getUpdates`
