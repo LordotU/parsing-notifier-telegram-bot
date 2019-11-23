@@ -36,7 +36,7 @@ def get_message(row, soup):
     Returns the Markdown formatted message
 
     Args:
-        row (str): A dictionary representation of urls.csv file row.
+        row (OrderedDict): A dictionary representation of urls.csv file row.
         soup (BeautifulSoup): A Beautiful Soup web page representation.
 
     Returns:
