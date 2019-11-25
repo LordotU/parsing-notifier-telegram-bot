@@ -1,4 +1,4 @@
-beautifulsoup4
-html5lib
-python-telegram-bot
-requests
+aiogram==2.4
+aiohttp==3.6.2
+beautifulsoup4==4.8.1
+html5lib==1.0.1

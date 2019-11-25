@@ -28,16 +28,20 @@ For example:
 def get_message(row, soup):
     """
     Returns the Markdown formatted message
-
     Args:
         row (OrderedDict): A dictionary representation of urls.csv file row.
         soup (BeautifulSoup): A Beautiful Soup web page representation.
-
     Returns:
         message (str): Markdown formatted message
     """
-    current_price = soup.find('span', class_='current-price').get_text()
-    message = '*{0}*\n\n_{1}_'.format(row['title'], current_price)
+    price_node = soup.find('span', class_='current-price')
+
+    if price_node is None:
+        return '*{0}*\n\n_Price was not found at:_\n\n{1}'.format(row['title'], row['url'])
+
+    price_value = price_node.get_text()
+    message = '*{0}*\n\n_{1}_'.format(row['title'], price_value)
+
     return message
 ```
 
