@@ -26,16 +26,16 @@ if TELEGRAM_CHAT_ID is None:
 
 bot = telegram.Bot(TELEGRAM_API_TOKEN)
 
-csv_file = open('urls.csv', mode='r')
-csv_reader = csv.DictReader(csv_file, delimiter=';')
+with open('urls.csv', mode='r') as csv_file:
+    csv_reader = csv.DictReader(csv_file, delimiter=';')
 
-for row in csv_reader:
-    response = requests.get(row['url'])
-    soup = BeautifulSoup(response.content, 'html5lib')
-    message = get_message(row, soup)
+    for row in csv_reader:
+        response = requests.get(row['url'])
+        soup = BeautifulSoup(response.content, 'html5lib')
+        message = get_message(row, soup)
 
-    logging.debug(message)
+        logging.debug(message)
 
-    bot.send_message(chat_id=TELEGRAM_CHAT_ID,
-                     text=message,
-                     parse_mode=telegram.ParseMode.MARKDOWN)
+        bot.send_message(chat_id=TELEGRAM_CHAT_ID,
+                         text=message,
+                         parse_mode=telegram.ParseMode.MARKDOWN)
